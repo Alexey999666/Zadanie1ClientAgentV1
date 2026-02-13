@@ -24,10 +24,10 @@
                             
                         
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
-                        <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}"/>
-                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
-                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding MiddleName}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding LastName}"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
                         <DataGridTextColumn Header="Почта" Binding="{Binding Email}"/>
                         </DataGrid.Columns>
 
@@ -66,7 +66,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Агенты">
+            <TabItem Header="Риелтор">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -74,13 +74,38 @@
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Про" Grid.Row="0" Margin="0,0,0,102" Grid.RowSpan="2" />
-                    <DataGrid Grid.Row="1" >
+                    <Label Content="Просмотр всех риелторов" Grid.Row="0"  />
+                    <DataGrid Grid.Row="1" x:Name="DGAgent" 
+                              IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            
 
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding MiddleName}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding LastName}"/>
+                            <DataGridTextColumn Header="Доля от комиссии" Binding="{Binding DealShare}"/>
+                            
+                        </DataGrid.Columns>
 
                     </DataGrid>
-                    <StackPanel Orientation="Horizontal" Grid.Row="2"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="3" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                       
+                            <Button x:Name="btnAddAgent" Click="btnAddAgent_Clicked"
+            Content="Добавить" Height="40" Width="100" Margin="10" />
+                            <Button x:Name="btnUpdateAgent" Click="btnUpdateAgent_Clicked"
+            Content="Редактировать" Height="40" Width="100" Margin="10"/>
+                            <Button x:Name="btnDeleteAgent" Click="btnDeleteAgent_Clicked"
+            Content="Удалить" Height="40" Width="100" Margin="10" />
+                        
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="3">
+                        <StackPanel Margin="0,0,10,0"  HorizontalAlignment="Center" >
+                            <Label Content="Поиск по Фамилии" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="tbAgentFindLastName" TextChanged="tcAgentFindLastName_Changed"
+             Height="35" Width="120" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

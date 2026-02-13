@@ -79,22 +79,34 @@ namespace Zadanie1ClientAgentV1
         private void DBLoaded_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDbClientInDG();
+            LoadDbAgentInDg();
         }
         void LoadDbClientInDG()
         {
             using (Zadanieee1Context _db = new Zadanieee1Context())
             {
-                int SelectedIndex = DGClient.SelectedIndex;
+                
                 DGClient.ItemsSource = _db.Clients.ToList();
               
 
             }
         }
+        void LoadDbAgentInDg()
+        {
+            using (Zadanieee1Context _db = new Zadanieee1Context())
+            {
+                
+                DGAgent.ItemsSource = _db.Agents.ToList();
+
+
+            }
+        }
+
 
         private void tcClientFindLastName_Changed(object sender, TextChangedEventArgs e)
         {
             List<Client> LastNameItems = (List<Client>)DGClient.ItemsSource;
-            var findLastName = LastNameItems.Where(p => p.LastName?.Contains(tbClientFindLastName.Text) == true);
+            var findLastName = LastNameItems.Where(p => p.FirstName?.Contains(tbClientFindLastName.Text) == true);
             if (findLastName.Count() > 0)
             {
                 var item = findLastName.First();
@@ -132,6 +144,69 @@ namespace Zadanie1ClientAgentV1
 
             }
             
+        }
+
+        private void btnAddAgent_Clicked(object sender, RoutedEventArgs e)
+        {
+            Data.agent = null;
+            AddEditAgent addeditagent = new AddEditAgent();
+            addeditagent.Owner = this;
+            addeditagent.ShowDialog();
+            LoadDbAgentInDg();
+        }
+
+        private void btnUpdateAgent_Clicked(object sender, RoutedEventArgs e)
+        {
+            if(DGAgent.SelectedItem != null)
+            {
+                Data.agent = (Agent)DGAgent.SelectedItem;
+                AddEditAgent addeditagent = new AddEditAgent();
+                addeditagent.Owner = this;
+                addeditagent.ShowDialog();
+                LoadDbAgentInDg();
+            }
+        }
+
+        private void btnDeleteAgent_Clicked(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result;
+            result = MessageBox.Show("Удалить запись?", "Удалить запись", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Agent row = (Agent)DGAgent.SelectedItem;
+                    if(row != null)
+                    {
+                        using Zadanieee1Context _db = new Zadanieee1Context();
+                        {
+                            _db.Agents.Remove(row);
+                            _db.SaveChanges();
+                        }
+                        LoadDbAgentInDg();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка удаления");
+                }
+            }
+            else DGAgent.Focus();
+
+        }
+
+        private void tcAgentFindLastName_Changed(object sender, TextChangedEventArgs e)
+        {
+            List<Agent> LastNameItem = (List<Agent>)DGAgent.ItemsSource;
+            var findAgLastName = LastNameItem.Where(p => p.FirstName.Contains(tbAgentFindLastName.Text));
+            if(findAgLastName.Count() > 0)
+            {
+                var item = findAgLastName.First();
+                DGAgent.SelectedItem = item;
+                DGAgent.ScrollIntoView(item);
+
+            }
+
         }
     }
 }

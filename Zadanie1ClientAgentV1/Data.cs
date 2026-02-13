@@ -10,5 +10,6 @@ namespace Zadanie1ClientAgentV1
     public static class Data
     {
         public static Client? client;
+        public static Agent? agent;
     }
 }

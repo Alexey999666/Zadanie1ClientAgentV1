@@ -1,11 +1,11 @@
-﻿<Window x:Class="Zadanie1ClientAgentV1.AddAndEditClient"
+﻿<Window x:Class="Zadanie1ClientAgentV1.AddEditAgent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zadanie1ClientAgentV1"
         mc:Ignorable="d"
-        Title="AddAndEditClient" Height="450" Width="800" x:Name="ClientAddEdit" Loaded="AddOrEditClient_Loaded">
+        Title="AddEditAgent" Height="450" Width="800" x:Name="AgentAddEdit" Loaded="AddOrEditAgent_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,27 +17,25 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" >
             <Label Content="Фамилия"/>
-            <TextBox x:Name="tbClientFirstName" TextWrapping="Wrap" Text="{Binding Path=FirstName}"/>
+            <TextBox x:Name="tbFirstName" TextWrapping="Wrap" Text="{Binding Path=FirstName}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" >
             <Label Content="Имя"/>
-            <TextBox   x:Name="tbClientMidleName" TextWrapping="Wrap" Text="{Binding Path=MiddleName}" />
+            <TextBox   x:Name="tbMiddleName" TextWrapping="Wrap" Text="{Binding Path=MiddleName}" />
         </StackPanel>
         <StackPanel Grid.Row="2" >
             <Label Content="Отчество"/>
-            <TextBox   x:Name="tbClientLastName" TextWrapping="Wrap" Text="{Binding Path=LastName}"/>
+            <TextBox   x:Name="tbLastName" TextWrapping="Wrap" Text="{Binding Path=LastName}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" >
-            <Label Content="Телефон"/>
-            <TextBox  x:Name="tbClientPhone" TextWrapping="Wrap" Text="{Binding Path=Phone}"/>
+            <Label Content="Доля от комиссии"/>
+            <TextBox  x:Name="tbDealShare" TextWrapping="Wrap" Text="{Binding Path=DealShare}"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" >
-            <Label Content="Почта"/>
-            <TextBox  x:Name="tbClientEmail" TextWrapping="Wrap" Text="{Binding Path=Email}"/>
-        </StackPanel>
+       
+        
         <StackPanel Grid.Row="5"  Orientation="Horizontal">
-            <Button x:Name="btnAddEdit" Height="40" Width="100" Margin="10" Click="btnAddEdit_Clicked"/>
-            <Button Content="Отмена" Height="40" Width="100" Margin="10" Click="btnCancel_Clicked" /> 
+            <Button x:Name="btnAddEditAgent" Height="40" Width="100" Margin="10" Click="btnAddEditAgent_Clicked"/>
+            <Button Content="Отмена" Height="40" Width="100" Margin="10" Click="btnCancel_Clicked" />
         </StackPanel>
     </Grid>
 </Window>
