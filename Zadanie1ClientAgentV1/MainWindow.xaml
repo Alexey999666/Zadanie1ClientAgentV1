@@ -5,10 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zadanie1ClientAgentV1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="MainWindow" Height="450" Width="800" 
+        Loaded="DBLoaded_Loaded">
     <Grid>
         <TabControl >
             <TabItem  Header="Клиент">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Просмотр всех клиентов" Grid.Row="0"  />
+                    <DataGrid Grid.Row="1" x:Name="DGClient" 
+                              IsReadOnly="True" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            
+                        
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}"/>
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Почта" Binding="{Binding Email}"/>
+                        </DataGrid.Columns>
+
+
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                        <Button x:Name="btnAddClient" Click="btnAddClient_Clicked"
+                                Content="Добавить" Height="40" Width="100" Margin="10" />
+                        <Button x:Name="btnUpdateClient" Click="btnUpdateClient_Clicked"
+                                Content="Редактировать" Height="40" Width="100" Margin="10"/>
+                        <Button x:Name="btnDeleteClient" Click="btnDeleteClient_Clicked"
+                                Content="Удалить" Height="40" Width="100" Margin="10" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="3">
+                        <StackPanel Margin="0,0,10,0"  HorizontalAlignment="Center" >
+                            <Label Content="Поиск по Фамилии" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="tbClientFindLastName" TextChanged="tcClientFindLastName_Changed"
+                                     Height="35" Width="120" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Margin="0,0,10,0"  HorizontalAlignment="Center" >
+                            <Label Content="Поиск по Телефону" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="tbClientFindPhone" TextWrapping="Wrap"
+                                     TextChanged="tcClientFindPhone_Changed" Height="35" Width="120" />
+                        </StackPanel>
+                        <StackPanel Margin="0,0,10,0"  HorizontalAlignment="Center" >
+                            <Label Content="Поиск по Почте" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="tbClientFindEmail" TextWrapping="Wrap"
+                                     TextChanged="tcClientFindEmail_Changed" Height="35" Width="120" />
+                        </StackPanel>
+                        <!--<StackPanel Margin="10,0,0,0" HorizontalAlignment="Center"> 
+                            <Label  Content="Фильтр" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="tbClientFilt" TextChanged="tcClientFilt_Changed" Height="35" Width="100" />
+                        </StackPanel>-->
+                        
+                    </StackPanel>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Агенты">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -22,12 +80,8 @@
 
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="2"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,101,0,0" Grid.RowSpan="2"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" />
                 </Grid>
-
-            </TabItem>
-            <TabItem Header="Агенты">
-
             </TabItem>
         </TabControl>
     </Grid>
